@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorTextTime">#999999</color>
+    <color name="colorTextMessage">#000000</color>
+    <color name="colorGreen">#31AF91</color> <!--#7CB342-->
+    <color name="colorSkyBlue">#EBF7FB</color>
+    <color name="colorPink">#F6E2E2</color>
+    <color name="colorRed">#FB4848</color>
+    <color name="colorOrange">#F1BEBE</color>
+    <color name="colorTranslucent">#70000000</color>
+</resources>

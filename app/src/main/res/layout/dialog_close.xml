@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialog_root"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/colorTranslucent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_close_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.85">
+
+            <TextView
+                android:id="@+id/tv_dialog_common_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="종료"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/div1"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                android:id="@+id/div1"
+                style="@style/divider_horizontal"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_dialog_common_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <FrameLayout
+                android:id="@+id/dialog_common_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_height="200dp"
+                app:layout_constraintBottom_toTopOf="@+id/div2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/div1"/>
+
+            <View
+                android:id="@+id/div2"
+                style="@style/divider_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_common_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:text="취소"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_close_dialog_btn"
+                app:layout_constraintTop_toBottomOf="@id/div2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/divider_button"/>
+
+            <View
+                android:id="@+id/divider_button"
+                style="@style/divider_vertical"
+                app:layout_constraintTop_toBottomOf="@id/div2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                android:id="@+id/btn_finish"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textColor="@android:color/white"
+                android:text="확인"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@drawable/background_close_dialog_btn"
+                app:layout_constraintLeft_toRightOf="@id/divider_button"
+                app:layout_constraintTop_toTopOf="@id/btn_cancel"
+                app:layout_constraintBottom_toBottomOf="@id/btn_cancel"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
