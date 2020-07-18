@@ -36,11 +36,7 @@ class CloseDialog(
         val mBinding: DialogCloseBinding = DialogCloseBinding.inflate(LayoutInflater.from(context))
         setContentView(mBinding.root)
 
-        mBinding.tvDialogCommonTitle.text = String.format(
-            Locale.getDefault(),
-            context.getString(R.string.msg_exit_close),
-            context.getString(R.string.app_name)
-        )
+        mBinding.tvDialogCommonTitle.text = String.format(Locale.getDefault(), context.getString(R.string.msg_exit_close), context.getString(R.string.app_name))
 
         val adManager = AdManager.Builder(mContext)
                 .setAdmangerTest(true)

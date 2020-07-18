@@ -41,6 +41,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     companion object {
         var interstitialAd: AdManager? = null
         var bottomAd: AdManager? = null
+        lateinit var closeDialog:CloseDialog
         private lateinit var CURRENT_SEX: String
         private const val MALE = "M"
         private const val FEMALE = "F"
@@ -99,8 +100,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
 
     @Suppress("DEPRECATION")
     private fun reConnect(msg: String?) {
-        val builder =
-            AlertDialog.Builder(this@MainActivity)
+        val builder = AlertDialog.Builder(this@MainActivity)
         builder.setTitle(null)
         builder.setMessage(msg)
         builder.setPositiveButton("확인") { dialog: DialogInterface?, which: Int ->
@@ -170,8 +170,8 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     private fun setAdvertisement() {
         setPopupAd()
         interstitialAd = AdManager.Builder(this@MainActivity)
-            .setAd(Ad(AdName.CAULY, AdType.INTERSTITIAL, "1231231232131"))
-            //.setAd(Ad(AdName.ADMOB, AdType.INTERSTITIAL, getString(R.string.admob_interstitial)))
+            .setAdmangerTest(true)
+            .setAd(Ad(AdName.ADMOB, AdType.INTERSTITIAL, getString(R.string.admob_interstitial)))
             .setOnInterstitialAdLoadListener(object : OnInterstitialAdLoadListener {
                 override fun onAdLoaded() {
                     interstitialAd?.showInterstitial()
@@ -190,10 +190,8 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     }
 
     private fun setPopupAd() {
-        val closeDialog =
-            CloseDialog(mContext = this);
-        closeDialog.addButtonListener(object :
-            CloseDialog.ButtonEvent {
+        closeDialog = CloseDialog(mContext = this);
+        closeDialog.addButtonListener(object : CloseDialog.ButtonEvent {
             override fun onPositiveBtn() {
                 closeDialog.dismiss()
                 finish()
@@ -239,6 +237,10 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         })
         selectSexDialog.setCancelable(false)
         selectSexDialog.show()
+    }
+
+    override fun onBackPressed() {
+        closeDialog.show()
     }
 
     override fun onDestroy() {
