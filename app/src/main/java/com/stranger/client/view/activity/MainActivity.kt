@@ -172,6 +172,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         interstitialAd = AdManager.Builder(this@MainActivity)
             .setAdmangerTest(true)
             .setAd(Ad(AdName.ADMOB, AdType.INTERSTITIAL, getString(R.string.admob_interstitial)))
+            .setAd(Ad(AdName.FACEBOOK, AdType.INTERSTITIAL, getString(R.string.facebook_interstitial)))
             .setOnInterstitialAdLoadListener(object : OnInterstitialAdLoadListener {
                 override fun onAdLoaded() {
                     interstitialAd?.showInterstitial()
@@ -183,6 +184,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         bottomAd = AdManager.Builder(this@MainActivity)
             .setContainer(mBinding!!.adContainer)
             .setAd(Ad(AdName.ADMOB, AdType.BANNER, getString(R.string.admob_banner_bottom)))
+            .setAd(Ad(AdName.FACEBOOK, AdType.BANNER, getString(R.string.facebook_banner_bottom)))
             .build()
         interstitialAd?.load()
         bottomAd?.load()

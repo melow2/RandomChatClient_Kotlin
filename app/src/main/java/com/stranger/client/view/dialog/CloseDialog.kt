@@ -42,6 +42,7 @@ class CloseDialog(
                 .setAdmangerTest(true)
                 .setContainer(mBinding.dialogCommonContent)
                 .setAd(Ad(AdName.ADMOB, AdType.HALF_BANNER, mContext.getString(R.string.admob_banner_popup)))
+                .setAd(Ad(AdName.FACEBOOK, AdType.HALF_BANNER, mContext.getString(R.string.facebook_banner_popup)))
                 .build();
         adManager.load();
 
