@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">안녕,낯선 사람</string>
     <string name="share_store_url">https://play.google.com/store/apps/details?id=%s</string>
     <string name="msg_server_is_busy">현재 사용자가 많아 접속이 지연되고 있습니다.\n잠시 후에 다시 이용해주세요.</string>
     <string name="msg_exit_close">%s앱을 종료하시겠습니까?</string>
@@ -14,11 +13,6 @@
     <string name="male">낯선 남자</string>
     <string name="female">낯선 여자</string>
     <string name="txt_require_sex">"당신의 성별을 선택하세요."</string>
-
-    <string name="admob_app_id">ca-app-pub-1555133146548007~8267192706</string>
-    <string name="admob_banner_bottom">ca-app-pub-1555133146548007/6954111031</string>
-    <string name="admob_interstitial">ca-app-pub-1555133146548007/4327947695</string>
-    <string name="admob_banner_popup">ca-app-pub-1555133146548007/9788157934</string>
 
     <string name="nav_item_notice">공지사항</string>
     <string name="nav_item_review">리뷰작성</string>
