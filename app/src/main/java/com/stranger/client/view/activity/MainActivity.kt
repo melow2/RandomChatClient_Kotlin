@@ -52,7 +52,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         super.onCreate(savedInstanceState)
         bindView(R.layout.activity_main);
         setToolbar(
-            (mBinding.toolbar as Toolbar)!!,
+            (mBinding.toolbar as Toolbar),
             false,
             getString(applicationInfo.labelRes),
             findViewById(R.id.tv_title)
@@ -113,7 +113,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     }
 
     private fun setNavigation() {
-        mBinding!!.navigationView.setNavigationItemSelectedListener { menuItem ->
+        mBinding.navigationView.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
             val id = menuItem.itemId
             when (id) {
@@ -128,7 +128,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-            mBinding!!.drawerLayout.closeDrawers()
+            mBinding.drawerLayout.closeDrawers()
             true
         }
     }
@@ -182,7 +182,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             })
             .build()
         bottomAd = AdManager.Builder(this@MainActivity)
-            .setContainer(mBinding!!.adContainer)
+            .setContainer(mBinding.adContainer)
             .setAd(Ad(AdName.ADMOB, AdType.BANNER, getString(R.string.admob_banner_bottom)))
             .setAd(Ad(AdName.FACEBOOK, AdType.BANNER, getString(R.string.facebook_banner_bottom)))
             .build()
@@ -215,11 +215,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                 CURRENT_SEX =
                     MALE
                 mBinding.scvMsgItem.setBackgroundColor(resources.getColor(R.color.colorSkyBlue))
-                ClientAsyncTask.ServerConnectTask(
-                    this@MainActivity,
-                    mBinding!!,
-                    CURRENT_SEX
-                )
+                ClientAsyncTask.ServerConnectTask(this@MainActivity, mBinding, CURRENT_SEX)
                     .execute()
                 selectSexDialog.dismiss()
             }

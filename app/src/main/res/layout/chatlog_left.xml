@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/lyt_msg_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp">
+
+            <LinearLayout
+                android:layout_gravity="left"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:padding="3sp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/icon_profile_02" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:layout_margin="3dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="낯선 사람"
+                            android:textColor="@color/colorTextMessage"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_msg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3sp"
+                                android:background="@drawable/background_chatlog_left"
+                                android:padding="8dp"
+                                android:textColor="@color/colorTextMessage"
+                                android:textSize="15sp"
+                                tools:text="afadfadfadfadfafdsafafdadfadfafdadfafdadfafdafdadfaf있나요?." />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="bottom"
+                        android:textColor="@color/colorTextTime"
+                        android:textSize="11sp"
+                        tools:text="오전 10시 40분" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

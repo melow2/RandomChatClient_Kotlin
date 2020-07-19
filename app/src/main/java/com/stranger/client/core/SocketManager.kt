@@ -27,8 +27,8 @@ object SocketManager {
 
     fun exit() {
         try {
-            selector!!.close()
-            socketChannel!!.close()
+            selector.close()
+            socketChannel.close()
         } catch (e: Exception) {
             e.printStackTrace()
         }

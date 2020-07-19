@@ -32,9 +32,9 @@ abstract class BaseActivity<Z : ViewDataBinding> : AppCompatActivity() {
         toolbar.title = "" // 기존의 툴바 타이틀 제거.
         toolbar.setContentInsetsAbsolute(0, 0) // 좌우 여백 제거.
         tvToolbarTitle.text = toolbarTitle
-        tvToolbarTitle.setTextColor(resources.getColor(R.color.colorRed))
+        // tvToolbarTitle.setTextColor(resources.getColor(R.color.colorRed))
         if (backBtnVisible) { // 뒤로가기 버튼 보이기.
-            toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
+            // toolbar.setNavigationIcon(R.drawable.ic_share_accent)
             toolbar.setNavigationOnClickListener { onBackPressed() }
         }
         setSupportActionBar(toolbar)

@@ -33,8 +33,8 @@ class SelectSexDialog(val mContext: Context)
         super.onCreate(savedInstanceState)
         val mBinding: DialogSelectSexBinding = DialogSelectSexBinding.inflate(LayoutInflater.from(mContext))
         setContentView(mBinding.root)
-        mBinding.ivFemale.setOnClickListener { v -> listener!!.onClickFemale() }
-        mBinding.ivMale.setOnClickListener { v -> listener!!.onClickMale() }
+        mBinding.ivFemale.setOnClickListener { listener!!.onClickFemale() }
+        mBinding.ivMale.setOnClickListener { listener!!.onClickMale() }
     }
 
 }
