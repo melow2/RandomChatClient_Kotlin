@@ -49,7 +49,7 @@ class RandomChatLog(
                     if (mClientInfo == FEMAIL) {
                         mBindingLeft.tvName.text = mContext.getString(R.string.female)
                         mBindingLeft.tvMsg.setBackgroundResource(R.drawable.background_chatlog_left_female)
-                        mBindingLeft.ivProfile.setImageResource(R.drawable.icons_female_profile_512)
+                        mBindingLeft.ivProfile.setImageResource(R.drawable.icons_female_profile)
                     } else {
                         mBindingLeft.tvName.text = mContext.getString(R.string.male)
                     }
