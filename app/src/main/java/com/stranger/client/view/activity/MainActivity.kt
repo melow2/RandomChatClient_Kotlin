@@ -3,6 +3,7 @@ package com.stranger.client.view.activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.os.SystemClock
@@ -193,6 +194,9 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
 
     private fun setPopupAd() {
         closeDialog = CloseDialog(mContext = this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            closeDialog.create();
+        }
         closeDialog.addButtonListener(object : CloseDialog.ButtonEvent {
             override fun onPositiveBtn() {
                 closeDialog.dismiss()
@@ -206,8 +210,10 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     }
 
     private fun setPopupSex() {
-        val selectSexDialog =
-            SelectSexDialog(mContext = this);
+        val selectSexDialog = SelectSexDialog(mContext = this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            selectSexDialog.create();
+        }
         selectSexDialog.addButtonListener(object :
             SelectSexDialog.Event {
             @Suppress("DEPRECATION")
