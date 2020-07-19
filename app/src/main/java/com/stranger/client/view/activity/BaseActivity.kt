@@ -15,7 +15,7 @@ import com.stranger.client.R
 
 abstract class BaseActivity<Z : ViewDataBinding> : AppCompatActivity() {
 
-    private lateinit var toolbar:Toolbar
+    private lateinit var toolbar: Toolbar
     lateinit var mBinding:Z
 
     protected fun bindView(layout: Int) {

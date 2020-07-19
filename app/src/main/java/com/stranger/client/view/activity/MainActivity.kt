@@ -52,7 +52,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         super.onCreate(savedInstanceState)
         bindView(R.layout.activity_main);
         setToolbar(
-            (mBinding.toolbar as Toolbar),
+            mBinding.toolbar as Toolbar,
             false,
             getString(applicationInfo.labelRes),
             findViewById(R.id.tv_title)
@@ -214,7 +214,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             override fun onClickMale() {
                 CURRENT_SEX =
                     MALE
-                mBinding.scvMsgItem.setBackgroundColor(resources.getColor(R.color.colorSkyBlue))
+                mBinding.scvMsgItem.setBackgroundColor(resources.getColor(R.color.colorChangedScrollViewBackground))
                 ClientAsyncTask.ServerConnectTask(this@MainActivity, mBinding, CURRENT_SEX)
                     .execute()
                 selectSexDialog.dismiss()
