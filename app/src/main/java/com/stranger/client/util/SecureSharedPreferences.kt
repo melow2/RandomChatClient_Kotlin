@@ -30,7 +30,6 @@ class SecureSharedPreferences(
         } as T
     }
 
-
     fun put(key: String, value: Boolean) = putInternal(key, value)
     fun put(key: String, value: Int) = putInternal(key, value)
     fun put(key: String, value: Long) = putInternal(key, value)

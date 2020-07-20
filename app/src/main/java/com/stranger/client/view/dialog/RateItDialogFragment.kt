@@ -17,8 +17,8 @@ import java.util.*
 
 class RateItDialogFragment : DialogFragment() {
     companion object {
-        private const val LAUNCHES_UNTIL_PROMPT = 1     // 5번 실행 제한.
-        private const val DAYS_UNTIL_PROMPT = 0         // 2일
+        private const val LAUNCHES_UNTIL_PROMPT = 5     // 5번 실행 제한.
+        private const val DAYS_UNTIL_PROMPT = 2         // 2일
         private const val MILLIS_UNTIL_PROMPT = DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000 // 하루
         private const val PREF_NAME = "APP_RATER"       // SharedPreference Name
         private const val LAST_PROMPT = "LAST_PROMPT"   // 마지막 시간
@@ -27,8 +27,7 @@ class RateItDialogFragment : DialogFragment() {
 
         fun show(context: Context, fragmentManager: FragmentManager) {
             var shouldShow = false
-            val sharedPreferences =
-                SecureSharedPreferences.wrap(getSharedPreferences(context), context);
+            val sharedPreferences = SecureSharedPreferences.wrap(getSharedPreferences(context), context);
             val currentTime = System.currentTimeMillis()                    // 현재 시간.
             var lastPromptTime = sharedPreferences.get(LAST_PROMPT, 0L)  // 마지막 실행 시간.
             if (lastPromptTime == 0L) {
