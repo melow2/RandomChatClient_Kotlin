@@ -21,14 +21,14 @@ import com.hyeoksin.admanager.OnInterstitialAdLoadListener
 import com.hyeoksin.admanager.data.Ad
 import com.hyeoksin.admanager.data.AdName
 import com.hyeoksin.admanager.data.AdType
-import com.stranger.client.BuildConfig
 import com.stranger.client.R
 import com.stranger.client.core.ClientAsyncTask
 import com.stranger.client.core.RandomChatLog
 import com.stranger.client.core.SocketManager.exit
 import com.stranger.client.databinding.MainActivityBinding
-import com.stranger.client.util.RateItDialogFragment
+import com.stranger.client.view.dialog.RateItDialogFragment
 import com.stranger.client.view.dialog.CloseDialog
+import com.stranger.client.view.dialog.NoticeDialogFragment
 import com.stranger.client.view.dialog.SelectSexDialog
 import com.stranger.client.view.handler.MainHandler
 import com.stranger.client.view.handler.WeakHandler
@@ -115,19 +115,19 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
 
     private fun setNavigation() {
         mBinding.navigationView.setNavigationItemSelectedListener { menuItem ->
-            menuItem.isChecked = true
-            val id = menuItem.itemId
-            when (id) {
-                R.id.navigation_item_notice -> Toast.makeText(
-                    this@MainActivity,
-                    menuItem.title,
-                    Toast.LENGTH_LONG
-                ).show()
-                R.id.navigation_item_review -> Toast.makeText(
-                    this@MainActivity,
-                    menuItem.title,
-                    Toast.LENGTH_LONG
-                ).show()
+            // menuItem.isChecked = true
+            when (menuItem.itemId) {
+                R.id.navigation_item_notice -> {
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    val prev = supportFragmentManager.findFragmentByTag("NOTICE")
+                    if(prev!=null) {
+                        // back 버튼을 눌렀을 경우 사라지게 됨.
+                        fragmentTransaction.remove(prev)
+                    }
+                    fragmentTransaction.addToBackStack(null)
+                    val newFragment = NoticeDialogFragment.newInstance(3)
+                    newFragment.show(fragmentTransaction,"NOTICE")
+                }
             }
             mBinding.drawerLayout.closeDrawers()
             true

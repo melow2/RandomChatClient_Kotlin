@@ -1,4 +1,4 @@
-package com.stranger.client.util
+package com.stranger.client.view.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -6,9 +6,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
@@ -28,7 +26,10 @@ class RateItDialogFragment : DialogFragment() {
 
         fun show(context: Context?, fragmentManager: FragmentManager) {
             var shouldShow = false
-            val sharedPreferences = getSharedPreferences(context!!)
+            val sharedPreferences =
+                getSharedPreferences(
+                    context!!
+                )
             val editor = sharedPreferences!!.edit()
             val currentTime = System.currentTimeMillis()                    // 현재 시간.
             var lastPromptTime = sharedPreferences.getLong(LAST_PROMPT, 0)  // 마지막 실행 시간.
@@ -46,8 +47,9 @@ class RateItDialogFragment : DialogFragment() {
                 editor.putInt(LAUNCHES, launches)   // 실행횟수 추가.
             }
             if (shouldShow) {
-                editor.putInt(LAUNCHES, 0).putLong(LAST_PROMPT, System.currentTimeMillis()).apply()
-                RateItDialogFragment().show(fragmentManager, null)
+                editor.putInt(LAUNCHES, 0).putLong(
+                    LAST_PROMPT, System.currentTimeMillis()).apply()
+                RateItDialogFragment().show(fragmentManager, "REVIEW")
             } else {
                 editor.commit()
             }
@@ -69,12 +71,16 @@ class RateItDialogFragment : DialogFragment() {
                     activity!!.packageName
                 )
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(addr)))
-                getSharedPreferences(activity!!)!!.edit().putBoolean(DISABLED, true).apply()
+                getSharedPreferences(
+                    activity!!
+                )!!.edit().putBoolean(DISABLED, true).apply()
                 dismiss()
             }
             .setNeutralButton(R.string.msg_rate_remind_later) { dialog, which -> dismiss() }
             .setNegativeButton(R.string.msg_rate_never) { dialog, which ->
-                getSharedPreferences(activity!!)!!.edit().putBoolean(DISABLED, true).apply()
+                getSharedPreferences(
+                    activity!!
+                )!!.edit().putBoolean(DISABLED, true).apply()
                 dismiss()
             }
         val dialog = builder.create();

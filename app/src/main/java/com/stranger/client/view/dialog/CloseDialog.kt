@@ -46,6 +46,8 @@ class CloseDialog(
                 .setAd(Ad(AdName.FACEBOOK, AdType.HALF_BANNER, mContext.getString(R.string.facebook_banner_popup)))
                 .build();
         adManager.load();
+
+        var intent = Intent(Intent.ACTION_SEND)
         mBinding.btnFinish.setOnClickListener { listener!!.onPositiveBtn() }
         mBinding.btnCancel.setOnClickListener { listener!!.onNegativeBtn() }
     }
