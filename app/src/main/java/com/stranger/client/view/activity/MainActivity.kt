@@ -9,11 +9,9 @@ import android.os.Looper
 import android.os.SystemClock
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import com.hyeoksin.admanager.AdManager
@@ -32,6 +30,7 @@ import com.stranger.client.view.dialog.NoticeDialogFragment
 import com.stranger.client.view.dialog.SelectSexDialog
 import com.stranger.client.view.handler.MainHandler
 import com.stranger.client.view.handler.WeakHandler
+import timber.log.Timber
 import java.util.*
 
 
@@ -52,6 +51,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.plant(Timber.DebugTree())
         bindView(R.layout.activity_main);
         setToolbar(
             mBinding.toolbar as Toolbar,

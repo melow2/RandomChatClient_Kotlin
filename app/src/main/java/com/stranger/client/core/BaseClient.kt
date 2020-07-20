@@ -4,8 +4,8 @@ import java.net.InetSocketAddress
 
 object BaseClient {
     //203.245.44.15
-    const val IP = "dQh6nVBqxaW00OiyO8o3xA=="
-    const val PORT = "PXeObq64RnKbxfk4cRuTOw=="
+    const val IP = "gIWuL8oAV0BFuXY+SrXc6g=="
+    const val PORT = "d/bgz+iHa15V6aLgBrgmqg=="
     const val TIMEOUT = 3000
     var connectAddress: InetSocketAddress?=null
 }

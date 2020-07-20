@@ -20,7 +20,7 @@ import com.stranger.client.core.SocketManager.disconnect
 import com.stranger.client.core.SocketManager.selector
 import com.stranger.client.core.SocketManager.socketChannel
 import com.stranger.client.databinding.MainActivityBinding
-import com.stranger.client.util.AES256Util
+import com.stranger.client.util.DataSecurityUtil
 import com.stranger.client.view.activity.MainActivity
 import com.stranger.client.view.handler.WeakHandler
 
@@ -43,8 +43,8 @@ open class RandomChatClient(
     init {
         try {
             connectAddress = InetSocketAddress(
-                AES256Util.decryption(IP),
-                AES256Util.decryption(PORT)?.toInt()!!)
+                DataSecurityUtil.decryptText(mContext,IP),
+                DataSecurityUtil.decryptText(mContext,PORT)?.toInt()!!)
             selector = Selector.open()
             socketChannel = SocketChannel.open(connectAddress)
             socketChannel.configureBlocking(false)
