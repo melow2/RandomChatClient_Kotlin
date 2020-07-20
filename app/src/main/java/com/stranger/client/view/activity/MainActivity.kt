@@ -128,6 +128,10 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                     val newFragment = NoticeDialogFragment.newInstance(3)
                     newFragment.show(fragmentTransaction,"NOTICE")
                 }
+                R.id.navigation_item_version ->{
+                    showToast(context = MainActivity@this, msg = "Version: "+packageManager.getPackageInfo(packageName,0).versionName+"v")
+                }
+
             }
             mBinding.drawerLayout.closeDrawers()
             true
