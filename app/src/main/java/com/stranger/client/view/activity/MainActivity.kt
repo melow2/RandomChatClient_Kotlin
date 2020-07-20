@@ -27,6 +27,7 @@ import com.stranger.client.core.ClientAsyncTask
 import com.stranger.client.core.RandomChatLog
 import com.stranger.client.core.SocketManager.exit
 import com.stranger.client.databinding.MainActivityBinding
+import com.stranger.client.util.RateItDialogFragment
 import com.stranger.client.view.dialog.CloseDialog
 import com.stranger.client.view.dialog.SelectSexDialog
 import com.stranger.client.view.handler.MainHandler
@@ -68,10 +69,9 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
 
 
     private fun init() {
-        mWeakHandler =
-            WeakHandler(Looper.getMainLooper())
-        val eventHandler =
-            MainHandler(this, mBinding)
+        RateItDialogFragment.show(MainActivity@this,supportFragmentManager)
+        mWeakHandler = WeakHandler(Looper.getMainLooper())
+        val eventHandler = MainHandler(this, mBinding)
         mBinding.edtMsg.filters = arrayOf<InputFilter>(LengthFilter(500))
         eventHandler.addEventListener(object :
             MainHandler.MainHandlerEvent {
@@ -144,20 +144,15 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         when (item.itemId) {
             android.R.id.home -> mBinding.drawerLayout.openDrawer(GravityCompat.START)
             R.id.share -> {
-                val title = java.lang.String.format(Locale.getDefault(),
+                val title = String.format(Locale.getDefault(),
                     getString(R.string.msg_share_message),
                     getString(applicationInfo.labelRes)
                 ) // app_name
-                val content = java.lang.String.format(
+                val content = String.format(
                     Locale.getDefault(),
                     getString(R.string.share_store_url),
                     packageName
                 ) // com.flower
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "onOptionsItemSelected()")
-                    Log.d(TAG, "title: $title")
-                    Log.d(TAG, "content: $content")
-                }
                 val intent = Intent(Intent.ACTION_SEND) // 공유하기.
                     .setType("text/plain")
                     .putExtra(Intent.EXTRA_SUBJECT, getString(applicationInfo.labelRes))

@@ -2,6 +2,7 @@ package com.stranger.client.view.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.hyeoksin.admanager.AdManager
@@ -45,7 +46,6 @@ class CloseDialog(
                 .setAd(Ad(AdName.FACEBOOK, AdType.HALF_BANNER, mContext.getString(R.string.facebook_banner_popup)))
                 .build();
         adManager.load();
-
         mBinding.btnFinish.setOnClickListener { listener!!.onPositiveBtn() }
         mBinding.btnCancel.setOnClickListener { listener!!.onNegativeBtn() }
     }
