@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.stranger.client.starrynight",
+  "variantName": "starrynightRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 11,
+      "versionName": "2.1.2",
+      "enabled": true,
+      "outputFile": "com.stranger.client.starrynight_2.1.2.apk"
+    }
+  ]
+}
