@@ -3,7 +3,6 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorTextTime">#999999</color>
     <color name="colorTextMessage">#000000</color>
     <color name="colorGreen">#31AF91</color> <!--#7CB342-->
     <color name="colorSkyBlue">#EBF7FB</color>

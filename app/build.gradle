@@ -25,8 +25,17 @@ android {
             applicationIdSuffix ".hellostranger"
             versionCode android.defaultConfig.versionCode
             versionName android.defaultConfig.versionName
-            buildConfigField "String", "EXPLAIN", "\"stranger\""
+            buildConfigField "String", "EXPLAIN", "\"hellostranger\""
             resValue "string", "app_name", "안녕, 낯선 사람"
+        }
+
+        starrynight {
+            dimension "randomchat"
+            applicationIdSuffix ".starrynight"
+            versionCode android.defaultConfig.versionCode
+            versionName android.defaultConfig.versionName
+            buildConfigField "String", "EXPLAIN", "\"starrynight\""
+            resValue "string", "app_name", "별이 빛나는 밤에"
         }
     }
 
@@ -40,11 +49,15 @@ android {
         hellostranger {
             res.srcDirs = ['src/randomchat/hellostranger/res']
         }
+
+        starrynight {
+            res.srcDirs = ['src/randomchat/starrynight/res']
+        }
     }
 
     signingConfigs{
         releaseWithSignedKey {
-            storeFile file("../hellostranger.jks")
+            storeFile file(SIGNED_STORE_FILE)
             storePassword SIGNED_STORE_PASSWORD
             keyAlias SIGNED_KEY_ALIAS
             keyPassword SIGNED_KEY_PASSWORD

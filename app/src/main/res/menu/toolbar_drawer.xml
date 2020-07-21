@@ -17,7 +17,7 @@
     </group>
 
 <!--    <item android:title="@string/nav_sub_menu">
-        <menu>
+        <icon_menu>
             <item
                 android:icon="@drawable/ic_emoticon"
                 android:id="@+id/nav_sub_menu_item01"
@@ -26,6 +26,6 @@
                 android:icon="@drawable/ic_emoticon"
                 android:id="@+id/nav_sub_menu_item02"
                 android:title="@string/nav_sub_menu_item02" />
-        </menu>
+        </icon_menu>
     </item>-->
 </menu>

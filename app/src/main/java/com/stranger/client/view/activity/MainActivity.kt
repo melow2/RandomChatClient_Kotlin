@@ -46,6 +46,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         private lateinit var CURRENT_SEX: String
         private const val MALE = "M"
         private const val FEMALE = "F"
+        private const val RESOURCE_URI = "android.resource://"
         private val TAG = MainActivity::class.java.simpleName
     }
 
@@ -60,7 +61,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             findViewById(R.id.tv_title)
         )
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setHomeAsUpIndicator(R.drawable.menu)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_menu)
         setNavigation()
         setAdvertisement()
         setPopupSex()
@@ -69,6 +70,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
 
 
     private fun init() {
+        setVideoBackground()
         RateItDialogFragment.show(MainActivity@this,supportFragmentManager)
         mWeakHandler = WeakHandler(Looper.getMainLooper())
         val eventHandler = MainHandler(this, mBinding)
@@ -97,6 +99,19 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             }
         })
         mBinding.handler = eventHandler
+    }
+
+    private fun setVideoBackground() {
+        when(packageName) {
+            getString(R.string.package_name_starrynight)->{
+                mBinding.vdvStarry.setVideoPath(RESOURCE_URI+packageName+"/"+R.raw.in_front_of)
+                mBinding.vdvStarry.start()
+                mBinding.vdvStarry.setOnPreparedListener {
+                    it.isLooping = true
+                }
+                mBinding.vdvStarry.visibility = View.VISIBLE
+            }
+        }
     }
 
     @Suppress("DEPRECATION")

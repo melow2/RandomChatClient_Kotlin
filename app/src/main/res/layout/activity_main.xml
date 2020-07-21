@@ -20,6 +20,16 @@
             android:layout_height="match_parent"
             tools:context=".view.activity.MainActivity">
 
+            <VideoView
+                android:id="@+id/vdv_starry"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
             <ProgressBar
                 android:id="@+id/pgb_main"
                 android:layout_width="wrap_content"
@@ -88,7 +98,8 @@
                     android:layout_height="?attr/actionBarSize"
                     android:padding="10dp"
                     android:maxLength="400"
-                    android:backgroundTint="@color/colorToolBar"
+                    android:textColor="@color/colorCursor"
+                    android:backgroundTint="@color/colorCursor"
                     android:textCursorDrawable="@drawable/background_text_cursor"
                     android:layout_weight="5" />
 

@@ -46,7 +46,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="낯선 사람"
-                            android:textColor="@color/colorTextMessage"
+                            android:textColor="@color/colorChatLeftName"
                             android:textSize="13sp"
                             android:textStyle="bold" />
                         <LinearLayout
@@ -60,9 +60,9 @@
                                 android:layout_marginTop="3sp"
                                 android:background="@drawable/background_chatlog_left"
                                 android:padding="8dp"
-                                android:textColor="@color/colorTextMessage"
+                                android:textColor="@color/colorChatLeftMessage"
                                 android:textSize="15sp"
-                                tools:text="afadfadfadfadfafdsafafdadfadfafdadfafdadfafdafdadfaf있나요?." />
+                                tools:text="안녕하세요." />
                         </LinearLayout>
                     </LinearLayout>
                     <TextView

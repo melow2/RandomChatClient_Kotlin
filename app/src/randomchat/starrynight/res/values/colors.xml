@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorToolBarBackground">#70000000</color>        <!-- 툴바 배경-->
+    <color name="colorToolBar">#FFFFFF</color>                  <!--툴바 타이틀 색-->
+    <color name="colorDrawer">#000000</color>                   <!--드로어 배경 색-->
+    <color name="colorDrawerText">#FFFFFF</color>               <!--드로어 텍스트 색-->
+    <color name="colorScrollViewBackground">#70000000</color>
+    <color name="colorChangedScrollViewBackground">#70000000</color>
+
+    <color name="colorCommandBackGround">#FB4848</color>
+
+    <color name="colorIconShare">#FFFFFF</color>            <!-- 공유하기 색 -->
+    <color name="colorIconRefresh">#FFFFFF</color>          <!-- 새로고침 색-->
+    <color name="colorIconSend">#FFFFFF</color>          <!-- 메세지 보내기 색-->
+    <color name="colorIconMenu">#FFFFFF</color>          <!-- 메뉴 색-->
+    <color name="colorTextTime">#999999</color>             <!-- 메세지 시간-->
+    <color name="colorChatLeftBackground">#A2DEFA</color>       <!-- 상대방 메세지 배경 색-->
+    <color name="colorChatLeftFemaleBackground">#F98CB3</color> <!-- 상대방이 여자일 경우 메세지 배경 색-->
+    <color name="colorChatLeftName">#FFFFFF</color>         <!-- 상대방 닉네임. -->
+    <color name="colorChatLeftMessage">#000000</color>      <!-- 상대방 메세지.-->
+
+    <color name="colorChatRightBackground">#FFEB3B</color>  <!-- 내 메세지 배경 색-->
+    <color name="colorChatRightMessage">#000000</color>     <!-- 내 메세지.-->
+    <color name="colorCommandText">#FFFFFF</color>          <!-- 커맨드 메세지.-->
+
+    <color name="colorCursor">#FFFFFF</color> <!-- 메세지 커서-->
+</resources>

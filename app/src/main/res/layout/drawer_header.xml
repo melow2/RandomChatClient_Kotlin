@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:background="@color/colorToolBar"
+    android:background="@color/colorDrawer"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:gravity="bottom">
@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textSize="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:textColor="@color/colorDrawerText"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
