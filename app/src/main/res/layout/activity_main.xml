@@ -20,16 +20,6 @@
             android:layout_height="match_parent"
             tools:context=".view.activity.MainActivity">
 
-            <VideoView
-                android:id="@+id/vdv_starry"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
             <ProgressBar
                 android:id="@+id/pgb_main"
                 android:layout_width="wrap_content"
@@ -79,10 +69,10 @@
                 android:id="@+id/lyt_send_msg"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorLayoutSendMessage"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
-
                 <ImageButton
                     android:id="@+id/btn_reload"
                     android:onClick="@{(v)->handler.onClickBtnReload(v)}"
@@ -98,11 +88,10 @@
                     android:layout_height="?attr/actionBarSize"
                     android:padding="10dp"
                     android:maxLength="400"
-                    android:textColor="@color/colorCursor"
+                    android:textColor="@color/colorMessage"
                     android:backgroundTint="@color/colorCursor"
                     android:textCursorDrawable="@drawable/background_text_cursor"
                     android:layout_weight="5" />
-
                 <ImageButton
                     android:id="@+id/btn_send"
                     android:onClick="@{(v)->handler.onClickSendBtn(v)}"

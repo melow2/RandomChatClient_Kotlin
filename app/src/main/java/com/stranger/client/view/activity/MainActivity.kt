@@ -3,10 +3,7 @@ package com.stranger.client.view.activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.os.Looper
-import android.os.SystemClock
+import android.os.*
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.view.Menu
@@ -37,17 +34,15 @@ import java.util.*
 class MainActivity : BaseActivity<MainActivityBinding>() {
 
     private lateinit var mWeakHandler: WeakHandler
-    private var mLastClickTime:Long = 0
+    private var mLastClickTime: Long = 0
 
     companion object {
         var interstitialAd: AdManager? = null
         var bottomAd: AdManager? = null
-        lateinit var closeDialog:CloseDialog
+        lateinit var closeDialog: CloseDialog
         private lateinit var CURRENT_SEX: String
         private const val MALE = "M"
         private const val FEMALE = "F"
-        private const val RESOURCE_URI = "android.resource://"
-        private val TAG = MainActivity::class.java.simpleName
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,16 +57,15 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         )
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_menu)
+        init()
         setNavigation()
         setAdvertisement()
         setPopupSex()
-        init()
     }
 
 
     private fun init() {
-        setVideoBackground()
-        RateItDialogFragment.show(MainActivity@this,supportFragmentManager)
+        RateItDialogFragment.show(MainActivity@ this, supportFragmentManager)
         mWeakHandler = WeakHandler(Looper.getMainLooper())
         val eventHandler = MainHandler(this, mBinding)
         mBinding.edtMsg.filters = arrayOf<InputFilter>(LengthFilter(500))
@@ -101,19 +95,6 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         mBinding.handler = eventHandler
     }
 
-    private fun setVideoBackground() {
-        when(packageName) {
-            getString(R.string.package_name_starrynight)->{
-                mBinding.vdvStarry.setVideoPath(RESOURCE_URI+packageName+"/"+R.raw.in_front_of)
-                mBinding.vdvStarry.start()
-                mBinding.vdvStarry.setOnPreparedListener {
-                    it.isLooping = true
-                }
-                mBinding.vdvStarry.visibility = View.VISIBLE
-            }
-        }
-    }
-
     @Suppress("DEPRECATION")
     private fun reConnect(msg: String?) {
         val builder = AlertDialog.Builder(this@MainActivity)
@@ -135,16 +116,22 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                 R.id.navigation_item_notice -> {
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     val prev = supportFragmentManager.findFragmentByTag("NOTICE")
-                    if(prev!=null) {
+                    if (prev != null) {
                         // back 버튼을 눌렀을 경우 사라지게 됨.
                         fragmentTransaction.remove(prev)
                     }
                     fragmentTransaction.addToBackStack(null)
                     val newFragment = NoticeDialogFragment.newInstance(3)
-                    newFragment.show(fragmentTransaction,"NOTICE")
+                    newFragment.show(fragmentTransaction, "NOTICE")
                 }
-                R.id.navigation_item_version ->{
-                    showToast(context = MainActivity@this, msg = "Version: "+packageManager.getPackageInfo(packageName,0).versionName+"v")
+                R.id.navigation_item_version -> {
+                    showToast(
+                        context = MainActivity@ this,
+                        msg = "Version: " + packageManager.getPackageInfo(
+                            packageName,
+                            0
+                        ).versionName + "v"
+                    )
                 }
 
             }
@@ -163,7 +150,8 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         when (item.itemId) {
             android.R.id.home -> mBinding.drawerLayout.openDrawer(GravityCompat.START)
             R.id.share -> {
-                val title = String.format(Locale.getDefault(),
+                val title = String.format(
+                    Locale.getDefault(),
                     getString(R.string.msg_share_message),
                     getString(applicationInfo.labelRes)
                 ) // app_name
@@ -185,9 +173,14 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     private fun setAdvertisement() {
         setPopupAd()
         interstitialAd = AdManager.Builder(this@MainActivity)
-            .setAdmangerTest(true)
             .setAd(Ad(AdName.ADMOB, AdType.INTERSTITIAL, getString(R.string.admob_interstitial)))
-            .setAd(Ad(AdName.FACEBOOK, AdType.INTERSTITIAL, getString(R.string.facebook_interstitial)))
+            .setAd(
+                Ad(
+                    AdName.FACEBOOK,
+                    AdType.INTERSTITIAL,
+                    getString(R.string.facebook_interstitial)
+                )
+            )
             .setOnInterstitialAdLoadListener(object : OnInterstitialAdLoadListener {
                 override fun onAdLoaded() {
                     interstitialAd?.showInterstitial()
@@ -232,8 +225,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             SelectSexDialog.Event {
             @Suppress("DEPRECATION")
             override fun onClickMale() {
-                CURRENT_SEX =
-                    MALE
+                CURRENT_SEX = MALE
                 mBinding.scvMsgItem.setBackgroundColor(resources.getColor(R.color.colorChangedScrollViewBackground))
                 ClientAsyncTask.ServerConnectTask(this@MainActivity, mBinding, CURRENT_SEX)
                     .execute()
@@ -242,8 +234,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
 
             @Suppress("DEPRECATION")
             override fun onClickFemale() {
-                CURRENT_SEX =
-                    FEMALE
+                CURRENT_SEX = FEMALE
                 ClientAsyncTask.ServerConnectTask(
                     this@MainActivity,
                     mBinding,
@@ -280,6 +271,10 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             mBinding.scvMsgItem.post { mBinding.scvMsgItem.fullScroll(View.FOCUS_DOWN) }
             mBinding.edtMsg.requestFocus()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 }
