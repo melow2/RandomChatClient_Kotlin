@@ -8,30 +8,31 @@ import com.stranger.client.core.BaseClient.connectAddress
 import com.stranger.client.core.MessageConstants.CONNECTION
 import com.stranger.client.core.MessageConstants.MESSAGING
 import com.stranger.client.core.MessageConstants.MSG_CONNECT_FAIL
-import com.stranger.client.core.MessageConstants.MSG_DELIM
 import com.stranger.client.core.MessageConstants.MSG_REQUIRE_RECONNECT
 import com.stranger.client.core.MessageConstants.NEW_CLIENT
 import com.stranger.client.core.MessageConstants.QUIT_CLIENT
 import com.stranger.client.core.MessageConstants.REQUIRE_ACCESS
 import com.stranger.client.core.MessageConstants.RE_CONNECT
-import com.stranger.client.core.MessageConstants.encoder
+import com.stranger.client.core.MessageConstants.byteBufferToObject
+import com.stranger.client.core.MessageConstants.objectToByteBuffer
 import com.stranger.client.core.SocketManager.ROOM_NUMBER
 import com.stranger.client.core.SocketManager.disconnect
+import com.stranger.client.core.SocketManager.exit
 import com.stranger.client.core.SocketManager.selector
 import com.stranger.client.core.SocketManager.socketChannel
 import com.stranger.client.databinding.MainActivityBinding
 import com.stranger.client.util.DataSecurityUtil
+import com.stranger.client.util.DataSecurityUtil.getDeviceId
 import com.stranger.client.view.activity.MainActivity
 import com.stranger.client.view.handler.WeakHandler
-
+import model.SocketClient
+import timber.log.Timber
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
-import java.nio.CharBuffer
 import java.nio.channels.SelectionKey
 import java.nio.channels.Selector
 import java.nio.channels.SocketChannel
-import java.util.*
 
 open class RandomChatClient(
     private val mContext: MainActivity,
@@ -49,9 +50,11 @@ open class RandomChatClient(
             socketChannel = SocketChannel.open(connectAddress)
             socketChannel.configureBlocking(false)
             socketChannel.register(selector, SelectionKey.OP_READ, StringBuffer())
-            socketChannel.write(encoder.encode(CharBuffer.wrap(REQUIRE_ACCESS + MSG_DELIM.toString() + mSex)))
+            val socketClient = SocketClient(REQUIRE_ACCESS,getDeviceId(mContext),mSex);
+            socketChannel.write(objectToByteBuffer(socketClient))
         } catch (e: Exception) {
             e.printStackTrace()
+            exit()
             addView(MSG_CONNECT_FAIL, null, 2)
         }
     }
@@ -85,7 +88,7 @@ open class RandomChatClient(
         val socket = channel.socket()
         val remoteAddr = socket.remoteSocketAddress
         try {
-            val readBuffer = ByteBuffer.allocate(1024 * 100)
+            val readBuffer = ByteBuffer.allocate(1024)
             readBuffer.clear()
             channel.configureBlocking(false) // 채널은 블록킹 상태이기 때문에 논블럭킹 설정.
             val size = channel.read(readBuffer)
@@ -94,45 +97,29 @@ open class RandomChatClient(
                 disconnect(channel, key, remoteAddr)
                 return
             }
-            val data = ByteArray(size)
-            System.arraycopy(readBuffer.array(), 0, data, 0, size)
-            val received = String(data, charset("UTF-8"))
-            messageProcessing(channel, key, received)
+            val client = byteBufferToObject(readBuffer) as SocketClient
+            readBuffer.compact()
+            messageProcessing(channel, key, client)
         } catch (e: IOException) {
+            e.printStackTrace()
             disconnect(channel, key, remoteAddr)
             addView(MSG_REQUIRE_RECONNECT, null, 2)
         }
     }
 
-    protected fun messageProcessing(
-        channel: SocketChannel,
-        key: SelectionKey,
-        received: String?
-    ) {
+    protected fun messageProcessing(channel: SocketChannel, key: SelectionKey, client: SocketClient) {
         try {
-            val tokenizer = StringTokenizer(received, MSG_DELIM)
-            val protocol = tokenizer.nextToken()
-            ROOM_NUMBER = tokenizer.nextToken()
-            var message = ""
-            when (protocol) {
-                CONNECTION, NEW_CLIENT, QUIT_CLIENT, RE_CONNECT -> {
-                    message = tokenizer.nextToken()
-                    addView(message, null, 2)
+            ROOM_NUMBER = client.roomNumber
+            when (client.protocol) {
+                CONNECTION, NEW_CLIENT, QUIT_CLIENT,RE_CONNECT -> {
+                    addView(client.message, null, 2)
                 }
                 MESSAGING -> {
-                    val msg = tokenizer.nextToken()
-                    val clientInfo = tokenizer.nextToken()
-                    mHandler.post(Runnable { addView(msg, clientInfo, 1) })
-                    while (tokenizer.hasMoreTokens()) {
-                        val rProtocol = tokenizer.nextToken()
-                        val rRoomNumber = tokenizer.nextToken()
-                        val rMsg = tokenizer.nextToken()
-                        val rClientInfo = tokenizer.nextToken()
-                        mHandler.post(Runnable { addView(rMsg, rClientInfo, 1) })
-                    }
+                    mHandler.post { addView(client.message, client.gender, 1) }
                 }
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             disconnect(channel, key, channel.socket().localSocketAddress)
             addView(MSG_REQUIRE_RECONNECT, null, 2)
         }

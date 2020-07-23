@@ -8,7 +8,9 @@
     <color name="colorSkyBlue">#EBF7FB</color>
     <color name="colorPink">#F6E2E2</color>
     <color name="colorRed">#FB4848</color>
+    <color name="colorDarkRed">#F80317</color>
     <color name="colorOrange">#F1BEBE</color>
     <color name="colorGray">#F4F4F4</color>
     <color name="colorTranslucent">#70000000</color>
+    <color name="colorYellow">#E8F803</color>
 </resources>

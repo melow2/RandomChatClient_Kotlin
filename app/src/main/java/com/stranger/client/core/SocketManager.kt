@@ -9,7 +9,7 @@ object SocketManager {
 
     lateinit var selector: Selector
     lateinit var socketChannel: SocketChannel
-    lateinit var ROOM_NUMBER:String
+    var ROOM_NUMBER:Long =0L
 
     internal fun disconnect(
         channel: SocketChannel,

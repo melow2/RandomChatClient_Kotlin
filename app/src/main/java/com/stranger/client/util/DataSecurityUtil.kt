@@ -3,14 +3,16 @@ package com.stranger.client.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.provider.Settings
+import android.telephony.TelephonyManager
 import android.util.Base64
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.security.spec.AlgorithmParameterSpec
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
-import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
+import kotlin.experimental.and
+import kotlin.experimental.or
 
 /*
 * 양방향 암호화 알고리즘인 AES256 암호화를 지원하는 서비스.
@@ -44,7 +46,6 @@ object DataSecurityUtil {
         return key
     }
 
-
     fun decryptText(context: Context, encryptedText: String?): String? {
         try {
             val encryptedByte = Base64.decode(encryptedText, Base64.DEFAULT)
@@ -56,5 +57,9 @@ object DataSecurityUtil {
             e.printStackTrace()
         }
         return ""
+    }
+
+    fun getDeviceId(mContext:Context):String{
+        return "DEVICE_SAMPLE"
     }
 }

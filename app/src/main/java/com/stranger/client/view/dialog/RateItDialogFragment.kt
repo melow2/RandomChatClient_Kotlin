@@ -56,8 +56,7 @@ class RateItDialogFragment : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val sharedPreferences =
-            SecureSharedPreferences.wrap(getSharedPreferences(activity!!), activity!!)
+        val sharedPreferences = SecureSharedPreferences.wrap(getSharedPreferences(activity!!), activity!!)
         val builder = AlertDialog.Builder(activity)
             .setTitle(R.string.msg_rate_title)
             .setMessage(R.string.msg_rate_message)

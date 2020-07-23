@@ -1,7 +1,5 @@
 package com.stranger.client.view.activity
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.*
 import android.text.InputFilter
@@ -9,6 +7,7 @@ import android.text.InputFilter.LengthFilter
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import com.hyeoksin.admanager.AdManager
@@ -18,14 +17,14 @@ import com.hyeoksin.admanager.data.AdName
 import com.hyeoksin.admanager.data.AdType
 import com.stranger.client.R
 import com.stranger.client.core.ClientAsyncTask
+import com.stranger.client.core.MessageConstants.FEMALE
+import com.stranger.client.core.MessageConstants.MALE
 import com.stranger.client.core.RandomChatLog
 import com.stranger.client.core.SocketManager.exit
 import com.stranger.client.databinding.MainActivityBinding
-import com.stranger.client.view.dialog.RateItDialogFragment
-import com.stranger.client.view.dialog.CloseDialog
-import com.stranger.client.view.dialog.NoticeDialogFragment
-import com.stranger.client.view.dialog.SelectSexDialog
+import com.stranger.client.view.dialog.*
 import com.stranger.client.view.handler.MainHandler
+import com.stranger.client.util.StarPointCounter
 import com.stranger.client.view.handler.WeakHandler
 import timber.log.Timber
 import java.util.*
@@ -40,9 +39,9 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         var interstitialAd: AdManager? = null
         var bottomAd: AdManager? = null
         lateinit var closeDialog: CloseDialog
+        lateinit var reconnectDialog: ReconnectDialog
         private lateinit var CURRENT_SEX: String
-        private const val MALE = "M"
-        private const val FEMALE = "F"
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,15 +59,49 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         init()
         setNavigation()
         setAdvertisement()
-        setPopupSex()
+        setPopupSexDialog()
+        setReconnectDialog()
     }
 
+    private fun setReconnectDialog() {
+        val headerStartCount = mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_star_count)
+        reconnectDialog = ReconnectDialog(mContext = this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            reconnectDialog.create();
+        }
+        reconnectDialog.addButtonListener(object : ReconnectDialog.ButtonEvent {
+            override fun onReconnectBtn(selected: String) {
+                if(selected == MALE || selected == FEMALE) {
+                    if (StarPointCounter.getStartCount(this@MainActivity) <= 0) {
+                        showToast(this@MainActivity, "원하는 성별 선택 시 별10개가 필요합니다.")
+                        return
+                    } else {
+                        mBinding.lytMsgline.removeAllViews()
+                        ClientAsyncTask.ReConnectTask(selected).execute()
+                        reconnectDialog.dismiss()
+                        headerStartCount.text = "x" + StarPointCounter.decreaseCount(this@MainActivity).toString()
+                    }
+                    return
+                }
+                mBinding.lytMsgline.removeAllViews()
+                ClientAsyncTask.ReConnectTask(MALE).execute()
+                reconnectDialog.dismiss()
+            }
+        })
+    }
 
     private fun init() {
+        // 별포인트 확인.
+        val starCount = StarPointCounter.count(this)
+        val tvStarCount = mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_star_count)
+        tvStarCount.text = "x"+ starCount
+
+        // 리뷰작성 다이얼로그.
         RateItDialogFragment.show(MainActivity@ this, supportFragmentManager)
+
         mWeakHandler = WeakHandler(Looper.getMainLooper())
         val eventHandler = MainHandler(this, mBinding)
-        mBinding.edtMsg.filters = arrayOf<InputFilter>(LengthFilter(500))
+        mBinding.edtMsg.filters = arrayOf<InputFilter>(LengthFilter(150))
         eventHandler.addEventListener(object :
             MainHandler.MainHandlerEvent {
 
@@ -89,24 +122,10 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             }
 
             override fun onClickBtnReload(msg: String?) {
-                reConnect(msg)
+                reconnectDialog.show()
             }
         })
         mBinding.handler = eventHandler
-    }
-
-    @Suppress("DEPRECATION")
-    private fun reConnect(msg: String?) {
-        val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle(null)
-        builder.setMessage(msg)
-        builder.setPositiveButton("확인") { dialog: DialogInterface?, which: Int ->
-            mBinding.lytMsgline.removeAllViews()
-            ClientAsyncTask.ReConnectTask().execute()
-        }
-        builder.setCancelable(true)
-        builder.create()
-        builder.show()
     }
 
     private fun setNavigation() {
@@ -123,6 +142,13 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                     fragmentTransaction.addToBackStack(null)
                     val newFragment = NoticeDialogFragment.newInstance(3)
                     newFragment.show(fragmentTransaction, "NOTICE")
+                }
+
+                R.id.navigation_item_store -> {
+                    showToast(
+                        context = MainActivity@ this,
+                        msg = "업데이트 준비 중입니다."
+                    )
                 }
                 R.id.navigation_item_version -> {
                     showToast(
@@ -216,7 +242,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         })
     }
 
-    private fun setPopupSex() {
+    private fun setPopupSexDialog() {
         val selectSexDialog = SelectSexDialog(mContext = this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             selectSexDialog.create();
@@ -227,8 +253,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             override fun onClickMale() {
                 CURRENT_SEX = MALE
                 mBinding.scvMsgItem.setBackgroundColor(resources.getColor(R.color.colorChangedScrollViewBackground))
-                ClientAsyncTask.ServerConnectTask(this@MainActivity, mBinding, CURRENT_SEX)
-                    .execute()
+                ClientAsyncTask.ServerConnectTask(this@MainActivity, mBinding, CURRENT_SEX).execute()
                 selectSexDialog.dismiss()
             }
 

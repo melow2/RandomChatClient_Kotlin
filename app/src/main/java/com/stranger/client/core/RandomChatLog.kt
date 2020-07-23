@@ -73,8 +73,7 @@ class RandomChatLog(
                     true
                 )
                 mBindingCommand.tvCommand.text = mReceivedMsg
-                CURRENT_LOG =
-                    STATE_ME
+                CURRENT_LOG = STATE_ME
             }
             3 -> {
                 val mBindingRight: ChatlogRightBinding = DataBindingUtil.inflate(
@@ -85,8 +84,7 @@ class RandomChatLog(
                 )
                 mBindingRight.tvMsg.text = mReceivedMsg
                 mBindingRight.tvTime.text = currentTime
-                CURRENT_LOG =
-                    STATE_ME
+                CURRENT_LOG = STATE_ME
             }
         }
     }

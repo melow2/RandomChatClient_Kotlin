@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/dialog_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorTranslucent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_notice_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.85">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="매칭 시 선호하는 성별을 선택하세요."
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/div1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                app:layout_constraintBottom_toTopOf="@id/tv_content1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <TextView
+                android:id="@+id/tv_content1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:text="원하는 성별의 낯선 상대와 만날 수 있습니다.\n선택하지 않는 경우 랜덤으로 매칭됩니다."
+                android:textColor="@android:color/white"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/div1" />
+
+            <TextView
+                android:id="@+id/tv_content2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:text="성별 선택 시, 별 10개가 차감됩니다."
+                android:textColor="@color/colorYellow"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_content1" />
+
+            <LinearLayout
+                android:id="@+id/lyt_current_star"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_current_star"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_content2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="현재 잔여 별"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="3dp"
+                    app:srcCompat="@drawable/icon_star" />
+
+                <TextView
+                    android:id="@+id/tv_star_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="x30"
+                    android:textColor="@android:color/white"
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyt_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                app:layout_constraintBottom_toTopOf="@id/div2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lyt_current_star">
+
+                <RadioGroup
+                    android:id="@+id/rg_prefer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbtn_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:button="@drawable/background_radio_male" />
+
+                    <RadioButton
+                        android:id="@+id/rbtn_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:button="@drawable/background_radio_female" />
+
+                    <RadioButton
+                        android:id="@+id/rbtn_random"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="5dp"
+                        android:button="@drawable/background_radio_random"
+                        android:checked="true" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/div2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                app:layout_constraintBottom_toTopOf="@+id/btn_reconnect"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lyt_radio_group" />
+
+            <Button
+                android:id="@+id/btn_reconnect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_btn_reconnect"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="새로운 상대방 연결하기"
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/div2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

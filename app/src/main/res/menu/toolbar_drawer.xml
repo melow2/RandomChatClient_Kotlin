@@ -6,10 +6,19 @@
             android:checked="true"
             android:icon="@drawable/icon_notice"
             android:title="@string/nav_item_notice" />
+
+        <item
+            android:id="@+id/navigation_item_store"
+            android:icon="@drawable/icon_store"
+            android:title="@string/nav_item_store" />
+
+
         <item
             android:id="@+id/navigation_item_version"
             android:icon="@drawable/icon_version"
             android:title="@string/nav_item_version" />
+
+
 <!--        <item
             android:id="@+id/navigation_item_location"
             android:icon="@drawable/ic_place"

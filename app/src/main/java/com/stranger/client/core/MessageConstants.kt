@@ -1,9 +1,10 @@
 package com.stranger.client.core
 
+import android.util.Log
+import java.io.*
 import java.nio.ByteBuffer
 import java.nio.CharBuffer
 import java.nio.charset.CharacterCodingException
-
 import java.nio.charset.CharsetEncoder
 
 object MessageConstants {
@@ -17,6 +18,10 @@ object MessageConstants {
     const val RE_CONNECT = "RE_CONNECT"
     const val MSG_CONNECT_FAIL = "현재 서버에 사용자가 많습니다."
     const val MSG_REQUIRE_RECONNECT = "서버와 연결이 끊어졌습니다. 앱을 다시 실행 해주세요"
+    const val MSG_LEAVE = "낯선 사람이 떠났습니다."
+    const val MALE = "M"
+    const val FEMALE = "F"
+    const val RANDOM = "R"
     val charset = Charsets.UTF_8
     var encoder: CharsetEncoder = charset.newEncoder()
 
@@ -26,5 +31,45 @@ object MessageConstants {
         buffer.clear()
         buffer = encoder.encode(CharBuffer.wrap(msg))
         return buffer
+    }
+
+    @Throws(java.lang.Exception::class)
+    fun byteBufferToObject(byteBuffer: ByteBuffer): Any? {
+        val bytes = ByteArray(byteBuffer.limit())
+        byteBuffer[bytes]
+        return deSerializer(bytes)
+    }
+
+    @Throws(Exception::class)
+    fun objectToByteBuffer(`object`: Any?): ByteBuffer? {
+        var byteBuf: ByteBuffer? = null
+        byteBuf = ByteBuffer.wrap(serializer(`object`))
+        byteBuf.rewind()
+        return byteBuf
+    }
+
+    @Throws(IOException::class, ClassNotFoundException::class)
+    fun deSerializer(bytes: ByteArray?): Any {
+        val objectInputStream = ObjectInputStream(ByteArrayInputStream(bytes))
+        return objectInputStream.readObject()
+    }
+
+    @Throws(IOException::class)
+    fun serializer(`object`: Any?): ByteArray? {
+        var objectOutputStream: ObjectOutputStream? = null
+        val byteArrayOutputStream: ByteArrayOutputStream
+        return try {
+            byteArrayOutputStream = ByteArrayOutputStream()
+            objectOutputStream = ObjectOutputStream(byteArrayOutputStream)
+            objectOutputStream.writeObject(`object`)
+            objectOutputStream.flush()
+            byteArrayOutputStream.toByteArray()
+        } catch (e: IOException) {
+            throw e
+        } finally {
+            if (objectOutputStream != null) {
+                objectOutputStream.close()
+            }
+        }
     }
 }
