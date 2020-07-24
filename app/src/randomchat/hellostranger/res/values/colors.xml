@@ -5,8 +5,10 @@
     <color name="colorDrawer">#FB4848</color>                   <!--드로어 배경 색-->
     <color name="colorDrawerText">#FFFFFF</color>               <!--드로어 텍스트 색-->
     <color name="colorScrollViewBackground">#F6E2E2</color>
-    <color name="colorChangedScrollViewBackground">#EBF7FB</color>
+    <color name="colorChangedScrollViewBackground">#F6E2E2</color>
 
+    <color name="colorNoticeCommandBackground">#F68888</color>
+    <color name="colorNoticeCommandText">#FFFFFF</color>
     <color name="colorCommandBackGround">#FB4848</color>
     <color name="colorLayoutSendMessage">#FFFFFF</color>
     <color name="colorMessage">#000000</color>              <!-- 메세지 텍스트 색-->

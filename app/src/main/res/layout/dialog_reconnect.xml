@@ -30,6 +30,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="15dp"
                 android:textStyle="bold"
+                android:background="@drawable/background_reconnect_header"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,6 +56,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="14dp"
                 android:textStyle="bold"
+                android:background="@color/colorLightGray"
                 app:layout_constraintTop_toBottomOf="@id/div1" />
 
             <TextView
@@ -68,13 +70,14 @@
                 android:textColor="@color/colorYellow"
                 android:textSize="14dp"
                 android:textStyle="bold"
+                android:background="@color/colorLightGray"
                 app:layout_constraintTop_toBottomOf="@id/tv_content1" />
 
             <LinearLayout
                 android:id="@+id/lyt_current_star"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_current_star"
+                android:background="@android:color/black"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -110,7 +113,7 @@
                 android:id="@+id/lyt_radio_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:background="@color/colorLightGray"
                 app:layout_constraintBottom_toTopOf="@id/div2"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -121,6 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_margin="15dp"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -128,21 +132,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:button="@drawable/background_radio_male" />
+                        android:button="@null"
+                        android:background="@drawable/background_radio_male"/>
 
                     <RadioButton
                         android:id="@+id/rbtn_female"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:button="@drawable/background_radio_female" />
+                        android:button="@null"
+                        android:background="@drawable/background_radio_female"/>
 
                     <RadioButton
                         android:id="@+id/rbtn_random"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:button="@drawable/background_radio_random"
+                        android:button="@null"
+                        android:background="@drawable/background_radio_random"
                         android:checked="true" />
                 </RadioGroup>
             </LinearLayout>

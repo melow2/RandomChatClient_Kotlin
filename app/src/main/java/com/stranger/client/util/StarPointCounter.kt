@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 class StarPointCounter {
     companion object {
-        private const val DAYS_UNTIL_PROMPT = 0         // 2일
+        private const val DAYS_UNTIL_PROMPT = 1         // 1일
         private const val MILLIS_UNTIL_PROMPT = DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000 // 하루
         const val PREF_NAME = "STAR_COUNTER"       // SharedPreference Name
         private const val LAST_PROMPT = "LAST_PROMPT"   // 마지막 시간

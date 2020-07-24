@@ -11,10 +11,10 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 13,
-      "versionName": "2.2.3",
+      "versionCode": 14,
+      "versionName": "2.2.4",
       "enabled": true,
-      "outputFile": "com.stranger.client.starrynight_2.2.3.apk"
+      "outputFile": "com.stranger.client.starrynight_2.2.4.apk"
     }
   ]
 }
