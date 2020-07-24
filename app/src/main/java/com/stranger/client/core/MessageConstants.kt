@@ -19,6 +19,7 @@ object MessageConstants {
     const val MSG_CONNECT_FAIL = "현재 서버에 사용자가 많습니다."
     const val MSG_REQUIRE_RECONNECT = "서버와 연결이 끊어졌습니다. 앱을 다시 실행 해주세요"
     const val MSG_LEAVE = "낯선 사람이 떠났습니다."
+    const val SKSP="FLOWERKDSAPEXMDIIQ)#DKWS(#JDCJDI"
     const val MALE = "M"
     const val FEMALE = "F"
     const val RANDOM = "R"

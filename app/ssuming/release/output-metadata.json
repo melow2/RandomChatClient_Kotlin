@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.stranger.client.ssuming",
+  "variantName": "ssumingRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 21,
+      "versionName": "2.4.0",
+      "enabled": true,
+      "outputFile": "com.stranger.client.ssuming_2.4.0.apk"
+    }
+  ]
+}

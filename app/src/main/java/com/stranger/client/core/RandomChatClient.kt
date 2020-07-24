@@ -22,6 +22,7 @@ import com.stranger.client.core.SocketManager.selector
 import com.stranger.client.core.SocketManager.socketChannel
 import com.stranger.client.databinding.MainActivityBinding
 import com.stranger.client.util.DataSecurityUtil
+import com.stranger.client.util.DataSecurityUtil.defaultDecryption
 import com.stranger.client.util.DataSecurityUtil.getDeviceId
 import com.stranger.client.view.activity.MainActivity
 import com.stranger.client.view.handler.WeakHandler
@@ -43,15 +44,13 @@ open class RandomChatClient(
         WeakHandler(Looper.getMainLooper())
     init {
         try {
-            connectAddress = InetSocketAddress(
-                DataSecurityUtil.decryptText(mContext,IP),
-                DataSecurityUtil.decryptText(mContext,PORT)?.toInt()!!)
+            connectAddress = InetSocketAddress(defaultDecryption(IP), defaultDecryption(PORT).toInt())
             selector = Selector.open()
             socketChannel = SocketChannel.open(connectAddress)
-            socketChannel.configureBlocking(false)
-            socketChannel.register(selector, SelectionKey.OP_READ, StringBuffer())
+            socketChannel?.configureBlocking(false)
+            socketChannel?.register(selector, SelectionKey.OP_READ, StringBuffer())
             val socketClient = SocketClient(REQUIRE_ACCESS,getDeviceId(mContext),mSex);
-            socketChannel.write(objectToByteBuffer(socketClient))
+            socketChannel?.write(objectToByteBuffer(socketClient))
         } catch (e: Exception) {
             e.printStackTrace()
             exit()
@@ -62,8 +61,8 @@ open class RandomChatClient(
     override fun run() {
         try {
             if (selector != null) {
-                while (selector.select() > 0) {
-                    val keys: MutableIterator<SelectionKey> = selector.selectedKeys().iterator()
+                while (selector?.select()!! > 0) {
+                    val keys: MutableIterator<SelectionKey> = selector?.selectedKeys()?.iterator()!!
                     while (keys.hasNext()) {
                         val key = keys.next()
                         keys.remove()

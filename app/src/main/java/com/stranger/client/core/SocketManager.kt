@@ -7,8 +7,8 @@ import java.nio.channels.SocketChannel
 
 object SocketManager {
 
-    lateinit var selector: Selector
-    lateinit var socketChannel: SocketChannel
+    var selector: Selector?=null
+    var socketChannel: SocketChannel?=null
     var ROOM_NUMBER:Long =0L
 
     internal fun disconnect(
@@ -27,8 +27,8 @@ object SocketManager {
 
     fun exit() {
         try {
-            selector.close()
-            socketChannel.close()
+            selector?.close()
+            socketChannel?.close()
         } catch (e: Exception) {
             e.printStackTrace()
         }

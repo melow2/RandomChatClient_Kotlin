@@ -72,11 +72,20 @@
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 
+            <View
+                android:id="@+id/div3"
+                style="@style/divider_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/scv_msg_item"
+                app:layout_constraintBottom_toTopOf="@id/lyt_send_msg"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
             <LinearLayout
                 android:id="@+id/lyt_send_msg"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorLayoutSendMessage"
+                app:layout_constraintTop_toBottomOf="@id/div3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">

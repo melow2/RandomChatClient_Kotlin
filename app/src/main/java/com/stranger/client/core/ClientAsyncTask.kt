@@ -60,7 +60,7 @@ object ClientAsyncTask {
             if (msg[0] != "") {
                 try {
                     val socketClient = SocketClient(MESSAGING,getDeviceId(_mContext), _mCurrentSex,ROOM_NUMBER,msg[0],null)
-                    socketChannel.write(objectToByteBuffer(socketClient))
+                    socketChannel?.write(objectToByteBuffer(socketClient))
                 } catch (e: IOException) {
                     addView(MSG_REQUIRE_RECONNECT, 2)
                 }
@@ -83,7 +83,7 @@ object ClientAsyncTask {
         override fun doInBackground(vararg p0: Void?): Boolean? {
             try {
                 val socketClient = SocketClient(RE_CONNECT,getDeviceId(_mContext), _mCurrentSex, ROOM_NUMBER,MSG_LEAVE,selected)
-                socketChannel.write(objectToByteBuffer(socketClient))
+                socketChannel?.write(objectToByteBuffer(socketClient))
             } catch (e: IOException) {
                 exit()
                 addView(MSG_REQUIRE_RECONNECT, 2)

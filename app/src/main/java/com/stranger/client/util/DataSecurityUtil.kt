@@ -6,18 +6,50 @@ import android.content.pm.PackageManager
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.util.Base64
+import com.stranger.client.core.MessageConstants.SKSP
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.security.spec.AlgorithmParameterSpec
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
+import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import kotlin.experimental.and
 import kotlin.experimental.or
 
-/*
-* 양방향 암호화 알고리즘인 AES256 암호화를 지원하는 서비스.
-* */
+
 object DataSecurityUtil {
+    private val ivBytes = byteArrayOf(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+
+    // 32바이트
+    fun defaultEncryption(str: String): String {
+        try {
+            val textBytes = str.toByteArray(charset("UTF-8"))
+            val ivSpec: AlgorithmParameterSpec = IvParameterSpec(ivBytes)
+            val newKey = SecretKeySpec(SKSP.toByteArray(charset("UTF-8")), "AES")
+            val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+            cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec)
+            return Base64.encodeToString(cipher.doFinal(textBytes), 0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return ""
+    }
+
+    fun defaultDecryption(str: String): String {
+        try {
+            val textBytes = Base64.decode(str, 0)
+            val ivSpec: AlgorithmParameterSpec = IvParameterSpec(ivBytes)
+            val newKey = SecretKeySpec(SKSP.toByteArray(charset("UTF-8")), "AES")
+            val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+            cipher.init(Cipher.DECRYPT_MODE, newKey, ivSpec)
+            return String(cipher.doFinal(textBytes), charset("UTF-8"))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return ""
+    }
+
     fun encryptText(context: Context, text: String): String? {
         try {
             var encryptedByte = text.toByteArray()

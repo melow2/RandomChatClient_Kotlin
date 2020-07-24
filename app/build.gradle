@@ -13,10 +13,31 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
-        versionCode 14
-        versionName "2.2.4"
+        versionCode 21
+        versionName "2.4.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.client.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs{
+        hellostranger {
+            storeFile file("../cabinet/hellostranger/hellostranger.jks")
+            storePassword SIGNED_STORE_PASSWORD
+            keyAlias SIGNED_KEY_ALIAS
+            keyPassword SIGNED_KEY_PASSWORD
+        }
+        starrynight {
+            storeFile file("../cabinet/starrynight/starrynight.jks")
+            storePassword SIGNED_STORE_PASSWORD
+            keyAlias SIGNED_KEY_ALIAS
+            keyPassword SIGNED_KEY_PASSWORD
+        }
+        ssuming {
+            storeFile file("../cabinet/ssuming/ssuming.jks")
+            storePassword SIGNED_STORE_PASSWORD
+            keyAlias SIGNED_KEY_ALIAS
+            keyPassword SIGNED_KEY_PASSWORD
+        }
     }
 
     productFlavors {
@@ -25,6 +46,7 @@ android {
             applicationIdSuffix ".hellostranger"
             versionCode android.defaultConfig.versionCode
             versionName android.defaultConfig.versionName
+            signingConfig signingConfigs.hellostranger
             buildConfigField "String", "EXPLAIN", "\"hellostranger\""
             resValue "string", "app_name", "안녕, 낯선 사람"
         }
@@ -34,8 +56,19 @@ android {
             applicationIdSuffix ".starrynight"
             versionCode android.defaultConfig.versionCode
             versionName android.defaultConfig.versionName
+            signingConfig signingConfigs.starrynight
             buildConfigField "String", "EXPLAIN", "\"starrynight\""
             resValue "string", "app_name", "별이 빛나는 밤에"
+        }
+
+        ssuming {
+            dimension "randomchat"
+            applicationIdSuffix ".ssuming"
+            versionCode android.defaultConfig.versionCode
+            versionName android.defaultConfig.versionName
+            signingConfig signingConfigs.ssuming
+            buildConfigField "String", "EXPLAIN", "\"ssuming\""
+            resValue "string", "app_name", "썸ing"
         }
     }
 
@@ -53,26 +86,23 @@ android {
         starrynight {
             res.srcDirs = ['src/randomchat/starrynight/res']
         }
-    }
 
-    signingConfigs{
-        releaseWithSignedKey {
-            storeFile file(SIGNED_STORE_FILE)
-            storePassword SIGNED_STORE_PASSWORD
-            keyAlias SIGNED_KEY_ALIAS
-            keyPassword SIGNED_KEY_PASSWORD
+        ssuming {
+            res.srcDirs = ['src/randomchat/ssuming/res']
         }
     }
+
 
     buildTypes {
+
         debug {
-            signingConfig signingConfigs.releaseWithSignedKey
+            signingConfig
         }
+
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.releaseWithSignedKey
             applicationVariants.all {
                 variant -> variant.outputs.all {
                     outputFileName = "${applicationId}"+"_"+"${defaultConfig.versionName}"+".apk"
