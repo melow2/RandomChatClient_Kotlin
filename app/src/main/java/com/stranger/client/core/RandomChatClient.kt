@@ -1,7 +1,6 @@
 package com.stranger.client.core
 
 import android.os.Looper
-import android.view.View
 import com.stranger.client.core.BaseClient.IP
 import com.stranger.client.core.BaseClient.PORT
 import com.stranger.client.core.BaseClient.connectAddress
@@ -20,14 +19,11 @@ import com.stranger.client.core.SocketManager.disconnect
 import com.stranger.client.core.SocketManager.exit
 import com.stranger.client.core.SocketManager.selector
 import com.stranger.client.core.SocketManager.socketChannel
-import com.stranger.client.databinding.MainActivityBinding
-import com.stranger.client.util.DataSecurityUtil
 import com.stranger.client.util.DataSecurityUtil.defaultDecryption
-import com.stranger.client.util.DataSecurityUtil.getDeviceId
 import com.stranger.client.view.activity.MainActivity
+import com.stranger.client.view.activity.MainActivity.Companion.addView
 import com.stranger.client.view.handler.WeakHandler
 import model.SocketClient
-import timber.log.Timber
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
@@ -36,12 +32,10 @@ import java.nio.channels.Selector
 import java.nio.channels.SocketChannel
 
 open class RandomChatClient(
-    private val mContext: MainActivity,
-    private val mBinding: MainActivityBinding,
-    private val mSex: String
-) : Runnable {
-    private val mHandler: WeakHandler =
-        WeakHandler(Looper.getMainLooper())
+    private val mContext:MainActivity,
+    private val mSex: String?) : Runnable {
+    private val mHandler: WeakHandler = WeakHandler(Looper.getMainLooper())
+
     init {
         try {
             connectAddress = InetSocketAddress(defaultDecryption(IP), defaultDecryption(PORT).toInt())
@@ -49,12 +43,12 @@ open class RandomChatClient(
             socketChannel = SocketChannel.open(connectAddress)
             socketChannel?.configureBlocking(false)
             socketChannel?.register(selector, SelectionKey.OP_READ, StringBuffer())
-            val socketClient = SocketClient(REQUIRE_ACCESS,getDeviceId(mContext),mSex);
+            val socketClient = SocketClient(REQUIRE_ACCESS,"getDeviceId(mContext)",mSex);
             socketChannel?.write(objectToByteBuffer(socketClient))
         } catch (e: Exception) {
             e.printStackTrace()
             exit()
-            addView(MSG_CONNECT_FAIL, null, 2)
+            addView(mContext,MSG_CONNECT_FAIL, null, 2)
         }
     }
 
@@ -75,7 +69,7 @@ open class RandomChatClient(
                     }
                 }
             } else {
-                addView(MSG_CONNECT_FAIL, null, 2)
+                addView(mContext,MSG_CONNECT_FAIL, null, 2)
             }
         } catch (e: IOException) {
         }
@@ -102,7 +96,7 @@ open class RandomChatClient(
         } catch (e: IOException) {
             e.printStackTrace()
             disconnect(channel, key, remoteAddr)
-            addView(MSG_REQUIRE_RECONNECT, null, 2)
+            addView(mContext,MSG_REQUIRE_RECONNECT, null, 2)
         }
     }
 
@@ -111,33 +105,16 @@ open class RandomChatClient(
             ROOM_NUMBER = client.roomNumber
             when (client.protocol) {
                 CONNECTION, NEW_CLIENT, QUIT_CLIENT,RE_CONNECT -> {
-                    addView(client.message, null, 2)
+                    addView(mContext,client.message, null, 2)
                 }
                 MESSAGING -> {
-                    mHandler.post { addView(client.message, client.gender, 1) }
+                    mHandler.post { addView(mContext,client.message, client, 1) }
                 }
             }
         } catch (e: Exception) {
             e.printStackTrace()
             disconnect(channel, key, channel.socket().localSocketAddress)
-            addView(MSG_REQUIRE_RECONNECT, null, 2)
+            addView(mContext,MSG_REQUIRE_RECONNECT, null, 2)
         }
     }
-
-    private fun addView(msg: String, client_info: String?, i: Int) {
-        mHandler.post(Runnable {
-            mBinding.lytMsgline.addView(
-                RandomChatLog(
-                    mContext,
-                    mBinding,
-                    msg,
-                    client_info,
-                    i
-                )
-            )
-            mBinding.scvMsgItem.post { mBinding.scvMsgItem.fullScroll(View.FOCUS_DOWN) }
-            mBinding.edtMsg.requestFocus()
-        })
-    }
-
 }

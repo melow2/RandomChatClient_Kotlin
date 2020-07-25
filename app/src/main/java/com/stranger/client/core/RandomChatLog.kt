@@ -10,14 +10,14 @@ import com.stranger.client.databinding.ChatlogLeftBinding
 import com.stranger.client.databinding.ChatlogRightBinding
 import com.stranger.client.databinding.MainActivityBinding
 import com.stranger.client.view.activity.MainActivity
+import model.SocketClient
 import java.text.SimpleDateFormat
 import java.util.*
 
 class RandomChatLog(
     private val mContext: Context,
-    private val mBinding: MainActivityBinding,
     private val mReceivedMsg: String,
-    private val mClientInfo: String?,
+    private val mClientInfo: SocketClient?,
     private val mCommand: Int
 ) : LinearLayout(mContext) {
 
@@ -46,7 +46,7 @@ class RandomChatLog(
                 if (CURRENT_LOG != STATE_STRANGER) {
                     mBindingLeft.ivProfile.visibility = View.VISIBLE
                     mBindingLeft.tvName.visibility = View.VISIBLE
-                    if (mClientInfo == FEMAIL) {
+                    if (mClientInfo?.gender == FEMAIL) {
                         mBindingLeft.tvName.text = mContext.getString(R.string.female)
                         mBindingLeft.tvMsg.setBackgroundResource(R.drawable.background_chatlog_left_female)
                         mBindingLeft.ivProfile.setImageResource(R.drawable.icons_female_profile)
@@ -56,7 +56,7 @@ class RandomChatLog(
                     CURRENT_LOG =
                         STATE_STRANGER
                 } else {
-                    if (mClientInfo == FEMAIL) {
+                    if (mClientInfo?.gender == FEMAIL) {
                         mBindingLeft.tvMsg.setBackgroundResource(R.drawable.background_chatlog_left_female)
                     }
                     mBindingLeft.ivProfile.visibility = View.INVISIBLE

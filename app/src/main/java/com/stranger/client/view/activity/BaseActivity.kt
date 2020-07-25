@@ -17,7 +17,6 @@ abstract class BaseActivity<Z : ViewDataBinding> : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     lateinit var mBinding:Z
-
     protected fun bindView(layout: Int) {
         mBinding = DataBindingUtil.setContentView<Z>(this, layout)
     }

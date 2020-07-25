@@ -1,7 +1,10 @@
 package com.stranger.client.view.activity
 
 import android.content.Intent
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.Looper
+import android.os.SystemClock
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.view.Menu
@@ -22,12 +25,14 @@ import com.stranger.client.core.MessageConstants.MALE
 import com.stranger.client.core.RandomChatLog
 import com.stranger.client.core.SocketManager.exit
 import com.stranger.client.databinding.MainActivityBinding
+import com.stranger.client.util.StarPointCounter
 import com.stranger.client.view.dialog.*
 import com.stranger.client.view.handler.MainHandler
-import com.stranger.client.util.StarPointCounter
 import com.stranger.client.view.handler.WeakHandler
+import model.SocketClient
 import timber.log.Timber
 import java.util.*
+import kotlin.system.exitProcess
 
 
 class MainActivity : BaseActivity<MainActivityBinding>() {
@@ -36,12 +41,19 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     private var mLastClickTime: Long = 0
 
     companion object {
+        lateinit var CURRENT_SEX:String
         var interstitialAd: AdManager? = null
         var bottomAd: AdManager? = null
         lateinit var closeDialog: CloseDialog
         lateinit var reconnectDialog: ReconnectDialog
-        private lateinit var CURRENT_SEX: String
-
+        fun addView(activity:MainActivity,msg: String, clientInfo: SocketClient?, i: Int) {
+            val mWeakHandler = WeakHandler(Looper.getMainLooper())
+            mWeakHandler.post {
+                activity.mBinding.lytMsgline.addView(RandomChatLog(activity, msg, clientInfo, i))
+                activity.mBinding.scvMsgItem.post { activity.mBinding.scvMsgItem.fullScroll(View.FOCUS_DOWN) }
+                activity.mBinding.edtMsg.requestFocus()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,7 +128,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                     }
                     mLastClickTime = SystemClock.elapsedRealtime()
                     ClientAsyncTask.SendMessageTask().execute(sendMessage)
-                    addView(msg, 3)
+                    addView(this@MainActivity,msg,null,3)
                 }
                 mBinding.edtMsg.setText("")
             }
@@ -165,6 +177,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             true
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
@@ -251,21 +264,16 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
             SelectSexDialog.Event {
             @Suppress("DEPRECATION")
             override fun onClickMale() {
+                // mBinding.scvMsgItem.setBackgroundColor(resources.getColor(R.color.colorChangedScrollViewBackground))
                 CURRENT_SEX = MALE
-                mBinding.scvMsgItem.setBackgroundColor(resources.getColor(R.color.colorChangedScrollViewBackground))
-                ClientAsyncTask.ServerConnectTask(this@MainActivity, mBinding, CURRENT_SEX).execute()
+                ClientAsyncTask.ServerConnectTask(this@MainActivity).execute()
                 selectSexDialog.dismiss()
             }
 
             @Suppress("DEPRECATION")
             override fun onClickFemale() {
                 CURRENT_SEX = FEMALE
-                ClientAsyncTask.ServerConnectTask(
-                    this@MainActivity,
-                    mBinding,
-                    CURRENT_SEX
-                )
-                    .execute()
+                ClientAsyncTask.ServerConnectTask(this@MainActivity).execute()
                 selectSexDialog.dismiss()
             }
         })
@@ -282,24 +290,5 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         exit()
     }
 
-    private fun addView(msg: String, i: Int) {
-        mWeakHandler.post {
-            mBinding.lytMsgline.addView(
-                RandomChatLog(
-                    this@MainActivity,
-                    mBinding,
-                    msg,
-                    null,
-                    i
-                )
-            )
-            mBinding.scvMsgItem.post { mBinding.scvMsgItem.fullScroll(View.FOCUS_DOWN) }
-            mBinding.edtMsg.requestFocus()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
 
 }
