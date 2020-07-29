@@ -22,6 +22,7 @@ object MessageConstants {
     const val MALE = "M"
     const val FEMALE = "F"
     const val RANDOM = "R"
+
     val charset = Charsets.UTF_8
     var encoder: CharsetEncoder = charset.newEncoder()
 
