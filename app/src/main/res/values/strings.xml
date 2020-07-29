@@ -2,7 +2,7 @@
     <string name="share_store_url">https://play.google.com/store/apps/details?id=%s</string>
     <string name="msg_server_is_busy">현재 사용자가 많아 접속이 지연되고 있습니다.\n잠시 후에 다시 이용해주세요.</string>
     <string name="package_name_starrynight">com.stranger.client.starrynight</string>
-    <string name="msg_exit_close">%s앱을 종료하시겠습니까?</string>
+    <string name="msg_exit_close">%s 앱을 종료하시겠습니까?</string>
     <string name="msg_no_user">대화 상대가 없습니다.</string>
     <string name="msg_reload">새로운 사람과 연결하시겠습니까?</string>
     <string name="msg_connection">안녕, 낯선 사람.</string>
@@ -51,10 +51,12 @@
 
     <string name="notice_5">
         ""
-        - 대화 내용은 저장되지 않으며, 복사 또한 불가능합니다.\n
+        - 앱 내 성적표현, 불건전스러운 언행을 엄격히 제한합니다.\n
+        - 범죄예방을 위해 사진전송기능은 업데이트하지 않습니다.\n
+        - 개인정보(전화번호,메신저ID 등)를 노출하지마세요.\n
         - 모든 데이터는 암호화 되어있어 추적이 불가능합니다.\n
-        - 사용자의 정보는 어디에도 저장되지 않습니다.\n
-        - 본인 스스로의 개인정보유출에 각별히 주의해주세요.
+        - 사용자의 개인정보는 어디에도 저장되지 않습니다.\n
+        - 앱을 삭제하면 모든 포인트가 초기화됩니다.
         ""
     </string>
 

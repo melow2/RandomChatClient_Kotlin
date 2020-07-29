@@ -13,8 +13,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
-        versionCode 27
-        versionName "2.6.1"
+        versionCode 29
+        versionName "2.6.4"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.lovely.runner.AndroidJUnitRunner"
     }
@@ -38,6 +38,13 @@ android {
             keyAlias SIGNED_KEY_ALIAS
             keyPassword SIGNED_KEY_PASSWORD
         }
+
+        lightconversation {
+            storeFile file("../cabinet/lightconversation/lightconversation.jks")
+            storePassword SIGNED_STORE_PASSWORD
+            keyAlias SIGNED_KEY_ALIAS
+            keyPassword SIGNED_KEY_PASSWORD
+        }
     }
 
     productFlavors {
@@ -48,7 +55,7 @@ android {
             versionName android.defaultConfig.versionName
             signingConfig signingConfigs.hellostranger
             buildConfigField "String", "EXPLAIN", "\"hellostranger\""
-            resValue "string", "app_name", "낯선사람과의 대화"
+            resValue "string", "app_name", "안녕, 낯선 사람"
         }
 
         starrynight {
@@ -70,6 +77,16 @@ android {
             buildConfigField "String", "EXPLAIN", "\"ssuming\""
             resValue "string", "app_name", "썸ing"
         }
+
+        lightconversation {
+            dimension "randomchat"
+            applicationIdSuffix ".lightconversation"
+            versionCode android.defaultConfig.versionCode
+            versionName android.defaultConfig.versionName
+            signingConfig signingConfigs.ssuming
+            buildConfigField "String", "EXPLAIN", "\"lightconversation\""
+            resValue "string", "app_name", "가벼운 대화"
+        }
     }
 
     sourceSets {
@@ -90,15 +107,16 @@ android {
         ssuming {
             res.srcDirs = ['src/randomchat/ssuming/res']
         }
+
+        lightconversation {
+            res.srcDirs = ['src/randomchat/lightconversation/res']
+        }
     }
 
 
     buildTypes {
 
-        debug {
-            signingConfig
-        }
-
+        debug {}
         release {
             minifyEnabled true
             shrinkResources true

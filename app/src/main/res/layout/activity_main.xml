@@ -44,21 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/toolbar"
-                app:layout_constraintBottom_toTopOf="@id/tv_notice"
+                app:layout_constraintBottom_toTopOf="@id/scv_msg_item"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
-
-            <TextView
-                android:id="@+id/tv_notice"
-                android:padding="10dp"
-                android:text="@string/notice_5"
-                android:textColor="@color/colorNoticeCommandText"
-                android:background="@drawable/background_notice_command"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/ad_container"
-                app:layout_constraintBottom_toTopOf="@id/scv_msg_item"/>
-
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/scv_msg_item"
@@ -67,13 +55,32 @@
                 android:background="@color/colorScrollViewBackground"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_notice"
+                app:layout_constraintTop_toBottomOf="@id/ad_container"
                 app:layout_constraintBottom_toTopOf="@id/lyt_send_msg">
                 <LinearLayout
-                    android:id="@+id/lyt_msgline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_notice"
+                            android:padding="10dp"
+                            android:text="@string/notice_5"
+                            android:textColor="@color/colorNoticeCommandText"
+                            android:background="@drawable/background_notice_command"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/ad_container"
+                            app:layout_constraintBottom_toTopOf="@id/scv_msg_item"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lyt_msgline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 
