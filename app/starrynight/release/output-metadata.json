@@ -4,17 +4,17 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.stranger.client.starrynight",
+  "applicationId": "com.happiness.lovely.starrynight",
   "variantName": "starrynightRelease",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 23,
-      "versionName": "2.4.1",
+      "versionCode": 26,
+      "versionName": "2.6.0",
       "enabled": true,
-      "outputFile": "com.stranger.client.starrynight_2.4.1.apk"
+      "outputFile": "com.happiness.lovely.starrynight_2.6.0.apk"
     }
   ]
 }

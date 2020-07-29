@@ -9,14 +9,14 @@ android {
     flavorDimensions "randomchat"
 
     defaultConfig {
-        applicationId "com.stranger.client"
+        applicationId "com.happiness.lovely"
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
-        versionCode 23
-        versionName "2.4.1"
+        versionCode 26
+        versionName "2.6.0"
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "androidx.client.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.lovely.runner.AndroidJUnitRunner"
     }
 
     signingConfigs{
@@ -48,7 +48,7 @@ android {
             versionName android.defaultConfig.versionName
             signingConfig signingConfigs.hellostranger
             buildConfigField "String", "EXPLAIN", "\"hellostranger\""
-            resValue "string", "app_name", "안녕, 낯선 사람"
+            resValue "string", "app_name", "낯선사람과의 대화"
         }
 
         starrynight {
@@ -58,7 +58,7 @@ android {
             versionName android.defaultConfig.versionName
             signingConfig signingConfigs.starrynight
             buildConfigField "String", "EXPLAIN", "\"starrynight\""
-            resValue "string", "app_name", "별이 빛나는 밤에"
+            resValue "string", "app_name", "랜챗의 정석"
         }
 
         ssuming {

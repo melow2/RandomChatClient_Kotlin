@@ -11,10 +11,10 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 23,
-      "versionName": "2.4.1",
+      "versionCode": 24,
+      "versionName": "2.4.2",
       "enabled": true,
-      "outputFile": "com.stranger.client.hellostranger_2.4.1.apk"
+      "outputFile": "com.stranger.client.hellostranger_2.4.2.apk"
     }
   ]
 }
