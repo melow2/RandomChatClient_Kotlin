@@ -13,8 +13,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
-        versionCode 29
-        versionName "2.6.4"
+        versionCode 30
+        versionName "2.6.5"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.lovely.runner.AndroidJUnitRunner"
     }

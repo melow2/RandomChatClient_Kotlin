@@ -1,8 +1,8 @@
 <resources>
-    <string name="admob_app_id">ca-app-pub-2998768890869854~4838199109</string>
-    <string name="admob_banner_bottom">ca-app-pub-2998768890869854/2212035768</string>
-    <string name="admob_interstitial">ca-app-pub-2998768890869854/3333545741</string>
-    <string name="admob_banner_popup">ca-app-pub-2998768890869854/5959709082</string>
+    <string name="admob_app_id">ca-app-pub-3611690084428818~3762621273</string>
+    <string name="admob_banner_bottom">ca-app-pub-3611690084428818/7510294590</string>
+    <string name="admob_interstitial">ca-app-pub-3611690084428818/3571049582</string>
+    <string name="admob_banner_popup">ca-app-pub-3611690084428818/4884131252</string>
 
     <string name="facebook_banner_popup">299018941342790_299021928009158</string>
     <string name="facebook_interstitial">299018941342790_299021388009212</string>

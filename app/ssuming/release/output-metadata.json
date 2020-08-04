@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.happiness.lovely.ssuming",
+  "variantName": "ssumingRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 30,
+      "versionName": "2.6.5",
+      "enabled": true,
+      "outputFile": "com.happiness.lovely.ssuming_2.6.5.apk"
+    }
+  ]
+}
